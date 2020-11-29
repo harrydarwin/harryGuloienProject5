@@ -1,5 +1,6 @@
 import firebase from "./firebase.js";
-import { Component } from 'react';
+import { Component, Fragment } from 'react';
+import AddTopic from './AddTopic.js'
 
 class TopicList extends Component {
     constructor() {
@@ -18,7 +19,7 @@ class TopicList extends Component {
             //retrieve the topics object from firebase data object, store in a variable to turn into an array of topics! 
             const firebaseDataObj = data.val();
             const topicsObject = firebaseDataObj.Topics;
-            // console.log(topicsObject);
+            console.log(topicsObject);
             
             //make empty array to store new topics
             let topicArray = [];
@@ -37,7 +38,7 @@ class TopicList extends Component {
                     const argumentText = topicArguments[argumentKey];
                     // console.log(argumentText);
                     const formattedArgument = {
-                        topic: topic,
+                        // topic: topic,
                         id: argumentKey,
                         argument: argumentText
                     }
@@ -48,11 +49,12 @@ class TopicList extends Component {
                 // console.log(argumentArray);
                 // console.log(topic);
                 topicFormat = {
-                    [topic]: argumentArray
+                    topic: topic,
+                    arguments: argumentArray
                 } 
 
                 topicArray.push(topicFormat)
-                
+                // console.log(topicFormat.topic);
                 
             }
             
@@ -66,11 +68,23 @@ class TopicList extends Component {
 
    render() { 
        return (
-           <ul className='topicList'>                
-            <li>
-                <p>topic</p>
-            </li>
-           </ul>
+        <Fragment>
+            <div className="topicHolder">
+                <ul className='topicList'> 
+                    {
+                        this.state.topicsList.map((point, i) => {
+                            return(
+                                <li key={i}>
+                                    <p>{point.topic}</p>
+                                </li>
+                            )
+                        })
+                    }        
+                </ul>
+                <p>Select a topic to argue</p>
+            </div>
+            <AddTopic />
+        </Fragment>
        )
    }
 }
