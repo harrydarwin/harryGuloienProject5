@@ -1,13 +1,16 @@
 import firebase from "./firebase.js";
 import { Component, Fragment } from 'react';
-import AddTopic from './AddTopic.js'
+import Main from './Main.js'
+// import AddTopic from './AddTopic.js'
 
 class TopicList extends Component {
     constructor() {
         super();
         this.state = {
             topicsList: [],
-            newTopic: ''
+            newTopic: '',
+            newArgue: '',
+            topicSelect: ''
         }
     }
 
@@ -66,6 +69,13 @@ class TopicList extends Component {
         })
     }
 
+    handleTopicSelect = () => {
+        this.setState({
+            topicSelect: this.topic
+        })
+        console.log(this)
+    }
+
    render() { 
        return (
         <Fragment>
@@ -75,7 +85,7 @@ class TopicList extends Component {
                         this.state.topicsList.map((point, i) => {
                             return(
                                 <li key={i}>
-                                    <p>{point.topic}</p>
+                                    <p className="listedTopic" onClick={this.handleTopicSelect}>{point.topic}</p>
                                 </li>
                             )
                         })
@@ -83,7 +93,7 @@ class TopicList extends Component {
                 </ul>
                 <p>Select a topic to argue</p>
             </div>
-            <AddTopic />
+            {/* <AddTopic /> */}
         </Fragment>
        )
    }
