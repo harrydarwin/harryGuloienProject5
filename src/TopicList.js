@@ -1,6 +1,7 @@
 import firebase from "./firebase.js";
 import { Component, Fragment } from 'react';
 import Main from './Main.js'
+import OpenArguments from './OpenArguments'
 // import AddTopic from './AddTopic.js'
 
 class TopicList extends Component {
@@ -65,36 +66,47 @@ class TopicList extends Component {
             this.setState({
                 topicsList: topicArray
             })
-            console.log(this.state);
+            console.log(this.state.topicsList);
+            
         })
     }
 
-    handleTopicSelect = () => {
-        this.setState({
-            topicSelect: this.topic
+    handleTopicSelect = (i) => {
+        const selectATopic = {
+            topicSelect: i.nativeEvent.target.innerHTML
+        }
+        this.setState(selectATopic, () => {
+            console.log(i.nativeEvent.target.innerHTML);
+            
         })
-        console.log(this)
     }
 
    render() { 
        return (
-        <Fragment>
-            <div className="topicHolder">
-                <ul className='topicList'> 
-                    {
-                        this.state.topicsList.map((point, i) => {
-                            return(
-                                <li key={i}>
-                                    <p className="listedTopic" onClick={this.handleTopicSelect}>{point.topic}</p>
-                                </li>
-                            )
-                        })
-                    }        
-                </ul>
-                <p>Select a topic to argue</p>
-            </div>
-            {/* <AddTopic /> */}
-        </Fragment>
+           <Fragment>
+               {
+                   
+                    this.state.topicSelect ?
+
+                    (<OpenArguments
+                        toArgue={this.state.topicSelect}
+                        fullList={this.state.topicsList}
+                        />)
+                        
+                
+                    : 
+                   
+                   this.state.topicsList.map((point, i) => {
+                       // console.log(point)
+                       return (
+                            <li key={i}>
+                                <p className="listedTopic" onClick={this.handleTopicSelect}>{point.topic}</p>
+                            </li>
+                       )
+                   })
+               }
+               
+           </Fragment>
        )
    }
 }

@@ -37,10 +37,12 @@ class AddTopic extends Component {
         return (
             <form>
                 <div className="flexColumn">
-                    <label className="srOnly" htmlFor="newTopic">Enter the topic you are arguing</label>
-                    <input onChange={this.handleInputChange} id="newTopic" type="text" placeholder="Add a topic!" />
-                    <label className="srOnly" htmlFor="initialArgument">Enter your initial argument or point of view</label>
-                    <textarea onChange={this.handleTextareaChange} name="initialArgument" id="initialArgument" placeholder="Enter your argument"></textarea>
+                    <label htmlFor="newTopic">Enter the topic you are arguing</label>
+                    <input onChange={this.handleInputChange} id="newTopic" type="text" placeholder="Topic" />
+                    <label htmlFor="newUserName">Enter your name</label>
+                    <input type="text" name="newUserName" id="newUserName" placeholder="Name" />
+                    <label htmlFor="initialArgument">Argue the topic but please refrain from personal attacks; racist, sexist, homophobic, transphobic, or any other offensive language will not be tolerated</label>
+                    <textarea onChange={this.handleTextareaChange} name="initialArgument" id="initialArgument" placeholder="Opening Argument"></textarea>
                     <button onClick={this.handleNewTopic} >Share An Opinion/New Topic</button>
                 </div>
             </form>
