@@ -27,80 +27,86 @@ class TopicList extends Component {
             
             //make empty array to store new topics
             let topicArray = [];
-            let topicFormat = {};
-            //loop through data object to extract useable info (keys and values)
-            for (let topics in topicsObject) {
-                const topic = topics;
-                // console.log(topic);
-                let argumentArray = [];
-                const topicArguments = topicsObject[topics]
-                // console.log(topicArguments);
-                
-
-                for (let argumentKey in topicArguments) {
-                    // console.log(argumentKey);
-                    const argumentText = topicArguments[argumentKey];
-                    // console.log(argumentText);
-                    const formattedArgument = {
-                        // topic: topic,
-                        id: argumentKey,
-                        argument: argumentText
-                    }
-
-                    argumentArray.push(formattedArgument);
-                     
-                }
-                // console.log(argumentArray);
-                // console.log(topic);
-                topicFormat = {
-                    topic: topic,
-                    arguments: argumentArray
-                } 
-
-                topicArray.push(topicFormat)
-                // console.log(topicFormat.topic);
-                
+            let currentTopic;
+            for (let topicId in topicsObject) {
+                currentTopic = topicsObject[topicId];
+                currentTopic.id = topicId;
+                topicArray.push(currentTopic);
             }
-            
-            // shove this formatted data from firebase into the state
+            console.log({topicArray});
             this.setState({
                 topicsList: topicArray
             })
-            console.log(this.state.topicsList);
+            // let topicFormat = {};
+            // //loop through data object to extract useable info (keys and values)
+            // for (let topics in topicsObject) {
+            //     const topic = topics;
+            //     // console.log(topic);
+            //     let argumentArray = [];
+            //     const topicArguments = topicsObject[topics]
+            //     // console.log(topicArguments);
+                
+
+            //     for (let argumentKey in topicArguments) {
+            //         // console.log(argumentKey);
+            //         const argumentText = topicArguments[argumentKey];
+            //         // console.log(argumentText);
+            //         const formattedArgument = {
+            //             // topic: topic,
+            //             id: argumentKey,
+            //             argument: argumentText
+            //         }
+
+            //         argumentArray.push(formattedArgument);
+                     
+            //     }
+            //     // console.log(argumentArray);
+            //     // console.log(topic);
+            //     topicFormat = {
+            //         topic: topic,
+            //         arguments: argumentArray
+            //     } 
+
+            //     topicArray.push(topicFormat);
+            //     // console.log(topicFormat.topic);
+                
+            // }
+            
+            // // shove this formatted data from firebase into the state
+            // this.setState({
+            //     topicsList: topicArray
+            // })
+            // // console.log(this.state.topicsList);
             
         })
     }
 
-    handleTopicSelect = (i) => {
-        const selectATopic = {
-            topicSelect: i.nativeEvent.target.innerHTML
-        }
-        this.setState(selectATopic, () => {
-            console.log(i.nativeEvent.target.innerHTML);
-            
-        })
-    }
+    handleTopicSelect = (topic) => {
+       this.setState({
+           selectedTopic: topic
+       })
+    }   
+    
 
-   render() { 
+   render() {
        return (
            <Fragment>
                {
                    
-                    this.state.topicSelect ?
+                    this.state.selectedTopic ?
 
                     (<OpenArguments
-                        toArgue={this.state.topicSelect}
-                        fullList={this.state.topicsList}
+                        topic={this.selectedTopic}
                         />)
                         
                 
                     : 
                    
-                   this.state.topicsList.map((point, i) => {
-                       // console.log(point)
+                   this.state.topicsList.map((topic) => {
+                    //    console.log(point)
                        return (
-                            <li key={i}>
-                                <p className="listedTopic" onClick={this.handleTopicSelect}>{point.topic}</p>
+                            <li key={topic.id}>
+                                <p className="listedTopic" onClick={ () => {this.handleTopicSelect(topic)}}>{topic.topic}</p>
                             </li>
                        )
                    })

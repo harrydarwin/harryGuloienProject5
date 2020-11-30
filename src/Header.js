@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import TopicUl from './TopicUl.js';
+import TopicList from './TopicList.js';
 import './header.css';
 
 class Header extends Component {
@@ -11,7 +11,9 @@ class Header extends Component {
                     <h1>Let's Argue</h1>
                     <h2>An open forum debating app you can use to argue other peoples opinions or share & defend one of your own</h2>
                     <div className="topicHolder">
-                        <TopicUl />
+                           <ul className='topicList'>
+                               <TopicList />
+                           </ul>
                     </div>
                 </div>
                </div>
