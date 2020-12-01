@@ -7,77 +7,51 @@ class OpenArgument extends Component {
     constructor() {
         super();
         this.state = {
-            topic: '',
+            topicId: '',
             currentArguments: [],
             newArgue: '',
-            userName: ''
+            userName: '',
+            topTag: "Ready To Argue?"
         }
     }
-
     
-    componentDidMount() {
-
-        const currentArgue = this.props.toArgue;
-        const theList = this.props.fullList;
-        const curArgumentArray = [];
-
-        const dbRef = firebase.database().ref();
-
-        dbRef.on('value', (data) => {
-            const firebaseDataObj = data.val();
-            const theseArguments = firebaseDataObj.Topics[currentArgue];
-            // console.log(theseArguments);
-
-            // for (let argument in theseArguments){
-                
-            //     const arguments = theseArguments[argument];
-                
-            // //    curArgumentArray.push(theseArguments[argument]);
-            // }
-
-            // console.log(curArgumentArray);
-            
-            // console.log(this.props.fullList);
-            
-            
-        // for (let choices in theList) {
-        //     if (theList[choices].topic === currentArgue) {
-        //         theList[choices].arguments.map((each) => {
-        //             const formatArgument = {
-        //                 id: each.id,
-        //                 argument: each.argument
-        //             }
-        //             curArgumentArray.push(formatArgument);
-        //         })
-        //     }
-        // }
-            
-            
-            
+        componentDidMount() {
+             
+        const curArgumentArray = [];            
 
             this.setState({
                 currentArguments: curArgumentArray,
                 userArgument: '',
             })
-            console.log(this.state.currentArguments)
-        })
+            console.log(this.props.topic)
+        // })
     }
 
     handleNewArgument = (e) => {
         e.preventDefault();
-        const currentTopic = this.props.toArgue;
-        
-        const dbArgumentRef = firebase.database().ref('Topics/' + currentTopic);
 
-       console.log(dbArgumentRef);
-        const setName = this.state.userName;
-        const setArgument = this.state.argument;
-        console.log(setName + ': ' + setArgument)
-        dbArgumentRef.push(setName + ': ' + setArgument);
+        if (this.state.userName && this.state.argument) {
 
-        //clear input field
-        document.querySelector('input').value = '';
-        document.querySelector('textarea').value = '';
+            const currentTopic = this.props.topic;
+            console.log(currentTopic.topic)
+            const dbTopicsRef = firebase.database().ref('responses')
+            
+            dbTopicsRef.push({
+                
+                userName: this.state.userName,
+                topicId: this.props.topic.id,
+                argument: this.state.argument,
+                // id: this.props.response.responses.Id
+            });
+            //clear input field
+            document.querySelector('input').value = '';
+            document.querySelector('textarea').value = '';
+        }
+        else {
+            this.setState({
+                topTag: "Don't be afraid to share your opinion"
+            })
+        }
     }
 
     handleUserNameInput = (e) => {
@@ -92,21 +66,26 @@ class OpenArgument extends Component {
         this.setState({
             argument: e.target.value
         })
+        
     }
-
     
-
 
    render() { 
        return (
            <div>
-                <h3>{this.props.toArgue}</h3>
+                <h3>{this.props.topic.topic}</h3>
+
+               <div key={this.props.topic.id} className="responses">
+                   <p><span className="userName">{this.props.topic.userName}:</span> {this.props.topic.argument}</p>
+               </div>
 
                 <ArgumentString
-                currentArguments={this.state.currentArguments}
+                topic={this.props.topic}
+                fullList={this.props.allTopics}
+                responses={this.props.response}
                 />
-
-                <h3>Ready to argue?</h3>
+                
+                <h3>{this.state.topTag}</h3>
                 <form>
                     <div className="flexColumn">
                         <label htmlFor="userName">Please enter your name</label>
