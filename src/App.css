@@ -1,3 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+
+@import url("https://fonts.googleapis.com/css2?family=Cinzel&display=swap");
+
+@import "./header.css";
+
+body {
+  font-family: 'Playfair Display', serif;
+
+}
+
+
 html {
   font-size: 62.5%;
   padding: 0;
@@ -38,7 +50,6 @@ li {
   list-style: none;
   margin: 0;
 }
-
 
 
 section {

@@ -2,6 +2,8 @@ import firebase from "./firebase.js";
 import { Component, Fragment } from 'react';
 import Main from './Main.js'
 import OpenArguments from './OpenArguments'
+import './App.css';
+import { TiArrowRight } from "react-icons/ti";
 // import AddTopic from './AddTopic.js'
 
 class TopicList extends Component {
@@ -72,7 +74,7 @@ class TopicList extends Component {
                        
                        return (
                             <li key={topic.id}>
-                                <p className="listedTopic" onClick={ () => {this.handleTopicSelect(topic)}}>{topic.topic}</p>
+                               <p className="listedTopic" onClick={() => { this.handleTopicSelect(topic) }}><span className="noSelect">{topic.topic}</span></p>
                             </li>
                        )
                    })

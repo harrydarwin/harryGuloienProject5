@@ -6,7 +6,7 @@ class Header extends Component {
    render() { 
        return (
            <header>
-               <section id="home">
+               <section id="home" className="home">
                     <div className="wrapper">
                         <div className="flexColumn">
                             <h1>Let's Argue</h1>
