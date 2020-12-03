@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import ScrollButton from './ScrollButton.js'
+import AddTopic from './AddTopic.js';
 
 class Main extends Component {
   
@@ -10,7 +10,12 @@ class Main extends Component {
        return (
            <main>
                <div className="wrapper">
-                    <ScrollButton />
+                    {
+                        this.props.formShowing ?
+                        <AddTopic />
+                        :
+                        <div></div>
+                    }
                </div>
            </main>
        )

@@ -30,7 +30,7 @@ class ArgumentString extends Component {
 
             const response = this.props.responses;
 
-            const finalArray = responseArray.filter(argument => argument.topicId == this.props.topic.id)
+            const finalArray = responseArray.filter(argument => argument.topicId === this.props.topic.id)
             console.log(finalArray);
 
             this.setState({

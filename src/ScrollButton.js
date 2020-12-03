@@ -1,6 +1,6 @@
 import { Component, Fragment } from 'react';
 import './main.css';
-import BodyAddTopic from './BodyAddTopic.js'
+import AddTopic from './AddTopic.js'
 
 
 
@@ -14,31 +14,17 @@ class ScrollButton extends Component {
         }
     }
 
-    scrollFunction = (whereTo) => {
-        ([document.documentElement, document.body]).animate({
-            scrollTop: whereTo.offset().top
-        }, 1000);
-    }
-
-    handleAddTopicToBody = () => {
-        this.setState({
-            buttonClicked: true
-        })
-
-    }
-
    render() { 
        return (
         <Fragment>
             <section className="addButton">
                 <div className="wrapper">
                     <div className="flexColumn">
-                        <a href="#topicForm" className="newTopicButton" onClick={this.handleAddTopicToBody} aria-label="Click to start new topic">Start a new topic</a>
-                        {
-                            this.state.buttonClicked ?
-
-                                <BodyAddTopic /> : <div></div>
-                        }
+                           <a href="#topicForm"
+                           className="button newTopicButton"
+                           onClick={() => { this.props.showForm() }}
+                           aria-label="Click to start new topic"
+                           >Start a new topic</a>
                     </div>
                 </div>
             </section>

@@ -74,7 +74,7 @@ class TopicList extends Component {
                        
                        return (
                             <li key={topic.id}>
-                               <p className="listedTopic" onClick={() => { this.handleTopicSelect(topic) }}><span className="noSelect">{topic.topic}</span></p>
+                               <p className="listedTopic btn" onClick={() => { this.handleTopicSelect(topic) }}><span className="noSelect">{topic.topic}</span></p>
                             </li>
                        )
                    })

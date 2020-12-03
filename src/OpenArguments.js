@@ -93,7 +93,7 @@ class OpenArgument extends Component {
 
                         <label htmlFor="userArgument">Argue the topic but please refrain from personal attacks; racist, sexist, homophobic, transphobic, or any other offensive language will not be tolerated</label>
                        <textarea onChange={this.handleTextareaChange} name="userArgument" id="userArgument" placeholder="Your point of view"></textarea>
-                       <button onClick={this.handleNewArgument} type='submit'>Submit Argument</button>
+                       <button className="btn" onClick={this.handleNewArgument} type='submit'>Submit Argument</button>
                    </div>
                 </form>
                 
