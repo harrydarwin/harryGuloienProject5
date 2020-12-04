@@ -1,5 +1,4 @@
 import { Component, Fragment } from 'react';
-import './main.css';
 import AddTopic from './AddTopic.js'
 
 

@@ -44,6 +44,8 @@ class BodyAddTopic extends Component {
                 argumentSubmit: true
             })
 
+            
+
         } else {
 
             this.setState({
@@ -111,7 +113,7 @@ class BodyAddTopic extends Component {
                                 <p>Don't forget to come back and defend your statement.</p>
                             </div>
                     }
-                    <a className="backHome button" href="#home">Back to other topics</a>
+                    <a className="backHome button" href="#App">Back to other topics</a>
                </div>
            </section>
        )

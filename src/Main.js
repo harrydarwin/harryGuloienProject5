@@ -3,9 +3,6 @@ import AddTopic from './AddTopic.js';
 
 class Main extends Component {
   
-
-    
-
    render() { 
        return (
            <main>

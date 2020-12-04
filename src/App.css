@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
 
-@import url("https://fonts.googleapis.com/css2?family=Cinzel&display=swap");
 
-@import "./header.css";
+
 
 body {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Rubik', sans-serif;
   color: #11151c;
 }
 
@@ -54,6 +54,9 @@ li {
   margin: 0;
 }
 
+p {
+  margin: 0;
+}
 
 section {
   padding: 20px 0;
@@ -67,11 +70,12 @@ form {
 
 .App {
   text-align: center;
+  height: 100%;
 }
 
 .wrapper {
   max-width: 1280px;
-  
+  background-color: #028090;
 }
 
 .flexBox {
@@ -83,7 +87,6 @@ form {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
   text-align: center;
 }
 
@@ -95,13 +98,14 @@ form {
   border: none;
   box-shadow: 0px 12px 0px 0px rgba(0,0,0,0.64);
   transition: all .5s;
+  border-radius: 25%;
 }
 
 .button:hover,
 .button:focus {
   box-shadow: 0px 8px 0px 0px rgba(0,0,0,0.64);
   transform: translateY(4px);
-  background: #d66853;
+  background: #05668d;
   cursor: pointer;
 }
 
@@ -111,36 +115,63 @@ form {
   transform: translateY(10px);
 }
 
+
+
+
 /* HEADER SECTION */
 
 .home {
-    background-color: #EEF1EF;
+    /* background-color: #EEF1EF; */
+    /* min-height: 100vh; */
+    margin: 0;
+    width: auto;
 }
 
+.heading {
+  margin: 0 auto;
+}
 
 h1 {
-    font-size: 4rem;
+    font-size: 6rem;
     margin: 0;
 }
 
 .headBox{
   justify-content: space-evenly;
-  width: 75%;
+  width: 100%;
 }
 
 .topicHolder {
     width: auto;
-    border: 20px solid #7c809b;
+    
     padding: 0 40px;
     text-align: left;
     flex-wrap: wrap;
+    justify-content: left;
+    align-items: left;
+}
+
+.topicList {
+  width: 200px;
+  height: 100vh;
+  overflow: scroll;
+  justify-content: flex-start;
+  background-color: #02c39a;
+}
+
+.topicList li {
+  display: inline-block;
+  width: 80%;
+  padding-left: 10px;
+  margin: 10px auto;
+  text-align: left;
+  border-bottom: 5px solid #f0f3bd;
 }
 
 .listedTopic {
     font-size: 2rem;
     font-style: italic;
-    padding: 5px;
-    box-sizing: border-box;
+    font-family: 'Playfair Display', serif;
 }
 
 
@@ -155,60 +186,10 @@ h1 {
     font-size: 3rem;
 }
 
-.btn {
-  width: 150px;
-  height: 50px;
-  border: 1px solid #333;
-  font-family: 'Cinzel', serif;
-  /* font-size: 20px; */
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  z-index: 0;
-  transition: 1s;
-}
-
-.btn::before, .btn::after {
-  position: absolute;
-  /* background: #eee; */
-  z-index: -1;
-  transition: 1s;
-  content: '';
-}
-
-.btn::before {
-  height: 50px;
-  width: 130px;
-}
-
-.btn::after {
-  width: 150px;
-  height: 30px;
-}
-
-
-
-.btn:hover::before {
-  width: 0px;
-}
-
-.btn:hover::after {
-  height: 0px;
-}
-
-
-.responses {
-  font-size: 2rem;
-  border: 2px solid blue;
-  margin: 10px;
-}
 
 /* MAIN */
 .topicForm {
-  background: #7c809b;
+  
   padding: 40px;
 }
 
@@ -224,8 +205,13 @@ h1 {
     margin: 0 auto;
 }
 
+.topicForm .flexColumn {
+  justify-content: center;
+  align-items: center;
+}
+
 .formContainer {
-  width: 100%;
+  width: 80%;
   margin: auto;
   justify-content: space-evenly;
   padding: 25px 0;
@@ -262,5 +248,64 @@ form label {
   max-width: 400px;
 }
 
+.mainContain {
+  height: 100%;
+}
 
+.openArguments {
+  height: 100%;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.openArguments form {
+ justify-self: flex-end;
+ border: 5px solid #fae3c6;
+ width: 300px;
+ background: #02c39a;
+}
+
+.openArguments form .flexColumn {
+  align-items: center;
+}
+
+.openArguments textarea {
+  width: 285px;
+}
+
+.openArguments label {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 2rem;
+  width: 300px;
+}
+
+.btn {
+  font-size: 1.5rem;
+}
+
+.viewHolder {
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.responses {
+  font-size: 1.5rem;
+  border: 1px solid #f7f7f7;
+  width: 60%;
+}
+
+.theArguments div:nth-of-type(2n) {
+  align-self: flex-end;
+  justify-self: flex-end;
+}
+
+.userName {
+  display: block;
+  font-style: bold;
+}
 

@@ -6,39 +6,37 @@ class ArgumentString extends Component {
         super();
         this.state = {
             topic: '',
-            responses: []
+            responses: [],
+            topicId: ''
         }
     }
 
     componentDidMount() {
-        const dbRef = firebase.database().ref();
+       
+            const finalArray = this.props.responses.filter(argument => argument.topicId === this.props.topic.id)
+            console.log(this.props);
 
-        dbRef.on('value', (data) => {
-            const firebaseDataObj = data.val();
-            const responseObject = firebaseDataObj.responses;
-            console.log({ responseObject });
+            this.setState({
+                topic: this.props.topic,
+                responses: finalArray
+            
+            })
+     
+    }
 
-            let responseArray = [];
-            let responses;
-            for (let responseId in responseObject) {
-                console.log(responseObject[responseId]);
-                responses = responseObject[responseId];
-                responses.Id = responseId;
-                responses.topicId = responseObject[responseId].topicId;
-                responseArray.push(responses);
-            }
-
-            const response = this.props.responses;
-
-            const finalArray = responseArray.filter(argument => argument.topicId === this.props.topic.id)
-            console.log(finalArray);
+    componentDidUpdate() {
+        if (this.props.topic !== this.state.topic) {
+            const finalArray = this.props.responses.filter(argument => argument.topicId === this.props.topic.id)
 
             this.setState({
                 topic: this.props.topic,
                 responses: finalArray
             })
-        })
+        }
+        console.log(this.state.responses)
+
     }
+
 
    render() { 
        return (

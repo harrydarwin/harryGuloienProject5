@@ -17,69 +17,51 @@ class TopicList extends Component {
             responseList: ''
         }
     }
-
-    componentDidMount() {
-
-        const dbRef = firebase.database().ref();
-
-        dbRef.on('value', (data) => {
-            //retrieve the topics object from firebase data object, store in a variable to turn into an array of topics! 
-            const firebaseDataObj = data.val();
-            const topicsObject = firebaseDataObj.Topics;
-           
-            let topicArray = [];
-            let currentTopic;
-            for (let topicId in topicsObject) {
-                currentTopic = topicsObject[topicId];
-                currentTopic.id = topicId;
-                topicArray.push(currentTopic);
-                
-            }
-            // console.log({responseArray});
-            this.setState({
-                topicsList: topicArray,
-                // responseList: responseArray
-            })
-            
-            
-            
-        })
+    componentDidMount(){
+        console.log(this.props.topic.topic)
     }
+    // componentDidMount() {
 
-    handleTopicSelect = (topic) => {
-       this.setState({
-           selectedTopic: topic
-       })
+    //     const dbRef = firebase.database().ref();
+
+    //     dbRef.on('value', (data) => {
+    //         //retrieve the topics object from firebase data object, store in a variable to turn into an array of topics! 
+    //         const firebaseDataObj = data.val();
+    //         const topicsObject = firebaseDataObj.Topics;
+           
+    //         let topicArray = [];
+    //         let currentTopic;
+    //         for (let topicId in topicsObject) {
+    //             currentTopic = topicsObject[topicId];
+    //             currentTopic.id = topicId;
+    //             topicArray.push(currentTopic);
+                
+    //         }
+    //         // console.log({responseArray});
+    //         this.setState({
+    //             topicsList: topicArray,
+    //             // responseList: responseArray
+    //         })
+            
+            
+            
+    //     })
+    // }
+
+    // handleTopicSelect = (topic) => {
+    //    this.setState({
+    //        selectedTopic: topic
+    //    })
        
-    }   
+    // }   
     
 
    render() {
        return (
            <Fragment>
-               {
-                   
-                    this.state.selectedTopic ?
-
-                    (<OpenArguments
-                        topic={this.state.selectedTopic}
-                        allTopics={this.state.topicsList}
-                        response={this.state.responseList}
-                        />)
-                        
-                
-                    : 
-                   
-                   this.state.topicsList.map((topic) => {
-                       
-                       return (
-                            <li key={topic.id}>
-                               <p className="listedTopic btn" onClick={() => { this.handleTopicSelect(topic) }}><span className="noSelect">{topic.topic}</span></p>
-                            </li>
-                       )
-                   })
-               }
-               
+               <li key={this.props.id}>
+                   <p className="listedTopic btn" onClick={() => { this.props.topicSelector(this.props.topic) }}><span className="noSelect">{this.props.topicName}</span></p>
+               </li>               
            </Fragment>
        )
    }
