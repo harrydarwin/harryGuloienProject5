@@ -18,7 +18,7 @@ class App extends Component {
             showForm: false,
             selectedTopic: '',
             topicList: [],
-            responses: []
+            responseList: []
         }
     }
 
@@ -41,33 +41,40 @@ class App extends Component {
             }
 
             const responseObject = firebaseDataObj.responses;
-            console.log({ responseObject });
+            // console.log({ responseObject });
 
             let responseArray = [];
             let responses;
             for (let responseId in responseObject) {
-                console.log(responseObject[responseId]);
+                
                 responses = responseObject[responseId];
                 responses.Id = responseId;
                 responses.topicId = responseObject[responseId].topicId;
                 responseArray.push(responses);
+                
             }
-
+            
+            
             this.setState({
                 topicList: topicArray,
                 responseList: responseArray
             })
-
+           
+           
         })
     }
 
+    componentWillUnmount() {
+        const dbRef = firebase.database().ref();
+        dbRef.off('value');
+    }
 
 
     handleTopicSelect = (topic) => {
         this.setState({
             selectedTopic: topic
         })
-        console.log(topic);
+       
 
     }   
 
@@ -80,7 +87,7 @@ class App extends Component {
     }
 
     
-    
+  
        
         
     
@@ -109,12 +116,12 @@ class App extends Component {
                            </ul>
                            {
                                this.state.selectedTopic ?
-
                                    <OpenArguments
                                        topic={this.state.selectedTopic}
                                        allTopics={this.state.topicList}
                                        response={this.state.responseList}
                                    />
+
                                    :
                            <div className="heading">
                                <h1>Let's Argue</h1>

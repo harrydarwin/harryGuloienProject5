@@ -12,30 +12,30 @@ class ArgumentString extends Component {
     }
 
     componentDidMount() {
-       
-            const finalArray = this.props.responses.filter(argument => argument.topicId === this.props.topic.id)
-            console.log(this.props);
+       console.log(this.props.responses);
+            // const finalArray = this.props.responses.filter(argument => argument.topicId === this.props.topic.id)
+            // console.log(this.props);
 
             this.setState({
                 topic: this.props.topic,
-                responses: finalArray
-            
+                response: this.props.responses
+                // topicId: this.props.topicId
             })
-     
+        // })
     }
 
-    componentDidUpdate() {
-        if (this.props.topic !== this.state.topic) {
-            const finalArray = this.props.responses.filter(argument => argument.topicId === this.props.topic.id)
+    // componentDidUpdate() {
+    //     if (this.props.topic !== this.state.topic) {
+    //         const finalArray = this.props.responses.filter(argument => argument.topicId === this.props.topic.id)
 
-            this.setState({
-                topic: this.props.topic,
-                responses: finalArray
-            })
-        }
-        console.log(this.state.responses)
+    //         this.setState({
+    //             topic: this.props.topic,
+    //             responses: finalArray
+    //         })
+    //     }
+    //     console.log(this.state.responses)
 
-    }
+    // }
 
 
    render() { 

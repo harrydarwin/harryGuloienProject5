@@ -71,6 +71,7 @@ form {
 .App {
   text-align: center;
   height: 100%;
+  margin: 0 auto;
 }
 
 .wrapper {
@@ -252,11 +253,15 @@ form label {
   height: 100%;
 }
 
+
+
 .openArguments {
   height: 100%;
-  margin: 0 auto;
+  width: 100%;
+  /* margin: 0 auto; */
   align-items: center;
   justify-content: space-between;
+  justify-self: center;
 }
 
 .openArguments form {
@@ -295,8 +300,9 @@ h3 {
 
 .responses {
   font-size: 1.5rem;
-  border: 1px solid #f7f7f7;
-  width: 60%;
+  border: 2px solid #f7f7f7;
+  width: 300px;
+  margin: 5px;
 }
 
 .theArguments div:nth-of-type(2n) {
@@ -309,3 +315,40 @@ h3 {
   font-style: bold;
 }
 
+@media (max-width: 1080px) {
+  .innerBorder {
+    border: none;
+  }
+
+  form {
+    border: none;
+  }
+
+  .mainContain {
+    height: auto;
+  }
+
+  .App {
+    height: auto;
+  }
+}
+
+@media (max-width: 780px) {
+  .topicList {
+    height: 200px;
+    flex-direction: row;
+  }
+
+  .App {
+    height: 100vh;
+  }
+
+  .mainContain {
+    flex-direction: column;
+  }
+
+  .openArguments {
+    flex-direction: column;
+  }
+
+}

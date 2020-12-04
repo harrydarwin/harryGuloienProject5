@@ -8,23 +8,15 @@ class OpenArgument extends Component {
         super();
         this.state = {
             topicId: '',
-            currentArguments: [],
+            responses: [],
             argument: '',
             userName: '',
             topTag: "Ready To Argue?"
         }
+        
     }
     
-        componentDidMount() {
-             
-        const curArgumentArray = [];            
-
-            this.setState({
-                currentArguments: curArgumentArray,
-                userArgument: '',
-            })
-      
-    }
+ 
 
     handleNewArgument = (e) => {
         e.preventDefault();
@@ -32,7 +24,6 @@ class OpenArgument extends Component {
         if (this.state.userName && this.state.argument) {
            
             const dbResponseRef = firebase.database().ref('responses')
-            
             dbResponseRef.push({
                 
                 userName: this.state.userName,
@@ -40,10 +31,18 @@ class OpenArgument extends Component {
                 argument: this.state.argument,
                 // id: this.props.response.responses.Id
             });
-            
+            // this.props.responseUpdate();
             //clear input field
             document.querySelector('input').value = '';
             document.querySelector('textarea').value = '';
+
+            const finalArray = this.props.response.filter(argument => argument.topicId === this.props.topic.id)
+            this.setState({
+                topic: this.props.topic,
+                responses: finalArray
+            }, () => { console.log(this.state.responses) })
+            
+            
         }
         else {
             this.setState({
@@ -69,22 +68,34 @@ class OpenArgument extends Component {
     
 
    render() { 
-       return (
+       return ( 
            <div className="openArguments flexBox">
+               {console.log(this.state.responses)
+              };
                <div className="viewHolder flexColumn">
                     <h3>{this.props.topic.topic}</h3>
 
                 <div key={this.props.topic.id} className="responses">
                     <p><span className="userName">{this.props.topic.userName}:</span> {this.props.topic.argument}</p>
                 </div>
-                <div>
+                {/* <div>
                     <ArgumentString
-                    topicId={this.props.topic.id}
-                    topic={this.props.topic}
+                    topic={this.state.topic}
                     fullList={this.props.allTopics}
-                    responses={this.props.response}
+                    responses={this.state.responses}
                     />
-                </div>
+                </div> */}
+                   <div className='theArguments'>
+                       {
+                           this.state.responses.map((topic) => {
+                               return (
+                                   <div key={topic.topicId} className="responses">
+                                       <p><span className="userName">{topic.userName}:</span> {topic.argument}</p>
+                                   </div>
+                               )
+                           })
+                       }
+                   </div>
                     
                     <h3>{this.state.topTag}</h3>
                </div>
