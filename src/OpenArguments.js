@@ -1,7 +1,6 @@
 import { Component } from 'react';
 import firebase from "./firebase.js";
 import './App.css';
-import ArgumentString from './ArgumentString.js';
 
 class OpenArgument extends Component {
     constructor() {
@@ -16,7 +15,7 @@ class OpenArgument extends Component {
         
     }
     
- 
+//  had my stuff working now there is somthing wrong mayybe with the asynchronisity of setState - my map functin isnt laying things out visually until after you submite the form below...
 
     handleNewArgument = (e) => {
         e.preventDefault();
@@ -37,10 +36,13 @@ class OpenArgument extends Component {
             document.querySelector('textarea').value = '';
 
             const finalArray = this.props.response.filter(argument => argument.topicId === this.props.topic.id)
+            console.log(finalArray)
             this.setState({
                 topic: this.props.topic,
                 responses: finalArray
-            }, () => { console.log(this.state.responses) })
+            }, () => { 
+                console.log(this.state.responses)
+            })
             
             
         }
@@ -70,7 +72,7 @@ class OpenArgument extends Component {
    render() { 
        return ( 
            <div className="openArguments flexBox">
-               {console.log(this.state.responses)
+               {/* {console.log(this.state.responses) */}
               };
                <div className="viewHolder flexColumn">
                     <h3>{this.props.topic.topic}</h3>
@@ -78,18 +80,11 @@ class OpenArgument extends Component {
                 <div key={this.props.topic.id} className="responses">
                     <p><span className="userName">{this.props.topic.userName}:</span> {this.props.topic.argument}</p>
                 </div>
-                {/* <div>
-                    <ArgumentString
-                    topic={this.state.topic}
-                    fullList={this.props.allTopics}
-                    responses={this.state.responses}
-                    />
-                </div> */}
                    <div className='theArguments'>
                        {
                            this.state.responses.map((topic) => {
                                return (
-                                   <div key={topic.topicId} className="responses">
+                                   <div key={topic.Id} className="responses">
                                        <p><span className="userName">{topic.userName}:</span> {topic.argument}</p>
                                    </div>
                                )
